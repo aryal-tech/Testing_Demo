@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{% block title %}Items Demo{% endblock %}</title>
+  <style>
+    :root { --fg:#111; --muted:#6b6b6b; --border:#e7e7e7; --brand:#5a32a3; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color: var(--fg);
+           max-width: 920px; margin: 2rem auto; padding: 0 1rem; }
+    header a { text-decoration: none; font-weight: 700; color: var(--brand); }
+    .btn { padding: .45rem .75rem; border:1px solid #cfcfcf; border-radius: 8px; background:#fafafa; cursor:pointer; }
+    .btn:hover, a.btn:hover { outline: 2px solid #bfbfbf; }
+    .btn-danger { border-color:#f1c0c0; }
+    .btn-danger:hover { outline-color:#f1a0a0; }
+    .error { color:#b00020; margin:.5rem 0; }
+    table { width:100%; border-collapse: collapse; margin-top:1rem; }
+    th, td { padding:.6rem .5rem; border-bottom:1px solid var(--border); text-align:left; }
+    th { font-weight:700; color:#222; }
+    .actions form { display:inline; margin-left:.25rem; }
+    .header-spacer { height: .25rem; }
+  </style>
+</head>
+<body>
+  <header style="display:flex;justify-content:space-between;align-items:center;">
+  <a id="brand-link" href="{{ url_for('index') }}">Items Demo</a>
+  <div>
+    {% if user %}
+      <span id="whoami">Hello, {{ user.username }}</span>
+      <form id="logout-form" action="{{ url_for('logout') }}" method="post" style="display:inline;">
+        <button class="btn" id="logout-btn" type="submit">Logout</button>
+      </form>
+    {% else %}
+      <a class="btn" id="header-login" href="{{ url_for('login') }}">Login</a>
+      <a class="btn" id="header-register" href="{{ url_for('register') }}">Register</a>
+    {% endif %}
+  </div>
+</header>
+
+  <div class="header-spacer"></div>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

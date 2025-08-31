@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+  <h1 id="register-title">Register</h1>
+  {% if error %}<div class="error" id="register-error">{{ error }}</div>{% endif %}
+  <form id="register-form" method="post" action="{{ url_for('do_register', next=request.args.get('next')) }}">
+    <label>Username</label><br/>
+    <input id="reg-username" name="username" type="text" value="{{ username or '' }}" required><br/><br/>
+    <label>Password</label><br/>
+    <input id="reg-password" name="password" type="password" required><br/><br/>
+    <button class="btn" id="register-submit" type="submit">Create Account</button>
+    <a class="btn" href="{{ url_for('login') }}">Go to Login</a>
+  </form>
+{% endblock %}

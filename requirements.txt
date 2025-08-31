@@ -1,0 +1,11 @@
+Flask==3.0.3
+Werkzeug>=3.0.0
+itsdangerous>=2.1.0
+click>=8.1.0
+
+# (Selenium + driver helper)
+selenium==4.24.0
+webdriver-manager==4.0.2
+
+# optional (only if you want pytest later; pyunit comes with Python)
+pytest==8.3.2

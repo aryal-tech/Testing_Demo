@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Items List{% endblock %}
+{% block content %}
+  <h1 id="page-title">Items</h1>
+  <p>
+    <a class="btn" id="new-item-btn" href="{{ url_for('new_item_form') }}">+ New Item</a>
+  </p>
+
+  <table id="items-table">
+    <thead>
+      <tr><th>ID</th><th>Name</th><th>Quantity</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      {% for i in items %}
+        <tr data-id="{{ i.id }}">
+          <td class="cell-id">{{ i.id }}</td>
+          <td class="cell-name">{{ i.name }}</td>
+          <td class="cell-qty">{{ i.quantity }}</td>
+          <td class="actions">
+            <a class="btn" id="edit-btn-{{ i.id }}" href="{{ url_for('edit_item_form', item_id=i.id) }}">Edit</a>
+            <form id="delete-form-{{ i.id }}" action="{{ url_for('delete_item_form', item_id=i.id) }}" method="post">
+              <button class="btn btn-danger" id="delete-btn-{{ i.id }}" type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% else %}
+        <tr><td colspan="4"><em>No items yet</em></td></tr>
+      {% endfor %}
+      {% if user %}
+  <a class="btn" id="new-item-btn" href="{{ url_for('new_item_form') }}">+ New Item</a>
+{% else %}
+  <a class="btn" id="new-item-btn" href="{{ url_for('login', next=url_for('new_item_form')) }}">+ New Item</a>
+{% endif %}
+
+    </tbody>
+  </table>
+{% endblock %}
